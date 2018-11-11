@@ -8,18 +8,34 @@ public abstract class Hero : Character
     protected string lore;
     [SerializeField]
     protected Sprite icon;
-
     [SerializeField]
-    private bool isSelected = false;
+    protected bool isSelected = false;
+
+    Transform partyLeader;
+
+    private void Start()
+    {
+        partyLeader = GameObject.Find("wizardgirl@set").transform;
+    }
 
     protected override void Move()
     {
-        if (!isSelected) return;
-        transform.Translate(Vector3.forward * ControlSystem.Axis.magnitude * speed * Time.deltaTime);
-        
-        if(ControlSystem.Axis != Vector2.zero)
+        if (isSelected)
         {
-            transform.rotation = Quaternion.LookRotation(new Vector3(ControlSystem.Axis.x, 0f, ControlSystem.Axis.y));
+            transform.Translate(Vector3.forward * ControlSystem.Axis.magnitude * speed * Time.deltaTime);
+
+            if (ControlSystem.Axis != Vector2.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(new Vector3(ControlSystem.Axis.x, 0f, ControlSystem.Axis.y));
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, partyLeader.position) > 1.2f)
+            {
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+                transform.LookAt(partyLeader);
+            }
         }
     }
 
@@ -34,19 +50,6 @@ public abstract class Hero : Character
     public Vector3 Position
     {
         get { return transform.position; }
-    }
-
-    public bool IsSelected
-    {
-        get
-        {
-            return isSelected;
-        }
-
-        set
-        {
-            isSelected = value;
-        }
     }
 }
 

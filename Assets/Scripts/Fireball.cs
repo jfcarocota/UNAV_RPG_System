@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour
     [SerializeField, Range(0f, 50f)]
     float lifetime;
 
-    [SerializeField, Range(0f, 10f)]
+    [SerializeField, Range(0f, 50f)]
     float moveSpeed;
 
     private void Start()
