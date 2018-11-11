@@ -10,7 +10,13 @@ public class Spell : StateMachineBehaviour
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        attackMage = GameManager.instance.Hero.GetComponent<AttackMage>();
+        foreach(Hero h in GameManager.instance.PartySystem.Party)
+        {
+            if (h.GetComponent<AttackMage>())
+            {
+                attackMage = h.GetComponent<AttackMage>();
+            }
+        }
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

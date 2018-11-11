@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using Core.PartySystem;
 
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager instance;
 
-    void Start()
+    [SerializeField]
+    PartySystem partySystem;
+
+    void Awake()
     {
         if (!instance)
         {
@@ -16,16 +19,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        partySystem.StartParty();
     }
 
-    [SerializeField]
-    Hero hero;
-
-    public Hero Hero
+    public PartySystem PartySystem
     {
         get
         {
-            return hero;
+            return partySystem;
         }
     }
 }

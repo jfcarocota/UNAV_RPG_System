@@ -8,7 +8,15 @@ public class Archer : Hero
     protected override void Move()
     {
         base.Move();
-        anim.SetFloat("move", Mathf.Abs(ControlSystem.Axis.magnitude));
+        /*if (!imLeader && !canMoveAsAllie)
+        {
+            anim.SetTrigger("reset");
+            return;
+        }*/
+        if (ImLeader)
+        {
+            anim.SetFloat("move", Mathf.Abs(ControlSystem.Axis.magnitude));
+        }
     }
 
     new void Update()

@@ -19,7 +19,10 @@ public class AttackMage : Mage
     protected override void Move()
     {
         base.Move();
-        anim.SetFloat("move", Mathf.Abs(ControlSystem.Axis.magnitude));
+        if (ImLeader)
+        {
+            anim.SetFloat("move", Mathf.Abs(ControlSystem.Axis.magnitude));
+        }
     }
 
     new void Update()

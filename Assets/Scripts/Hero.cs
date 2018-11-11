@@ -9,18 +9,21 @@ public abstract class Hero : Character
     [SerializeField]
     protected Sprite icon;
     [SerializeField]
-    protected bool isSelected = false;
+    private bool imLeader = false;
 
     Transform partyLeader;
 
+    private bool canMoveAsAllie = false;
+
     private void Start()
     {
-        partyLeader = GameObject.Find("wizardgirl@set").transform;
+        partyLeader = GameManager.instance.PartySystem.Leader.transform;
+        imLeader = this == partyLeader.GetComponent<Hero>();
     }
 
     protected override void Move()
     {
-        if (isSelected)
+        if (imLeader)
         {
             transform.Translate(Vector3.forward * ControlSystem.Axis.magnitude * speed * Time.deltaTime);
 
@@ -31,7 +34,8 @@ public abstract class Hero : Character
         }
         else
         {
-            if (Vector3.Distance(transform.position, partyLeader.position) > 1.2f)
+            canMoveAsAllie = Vector3.Distance(transform.position, partyLeader.position) > 1.2f;
+            if (canMoveAsAllie)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);
                 transform.LookAt(partyLeader);
@@ -50,6 +54,22 @@ public abstract class Hero : Character
     public Vector3 Position
     {
         get { return transform.position; }
+    }
+
+    public bool CanMoveAsAllie
+    {
+        get
+        {
+            return canMoveAsAllie;
+        }
+    }
+
+    public bool ImLeader
+    {
+        get
+        {
+            return imLeader;
+        }
     }
 }
 
