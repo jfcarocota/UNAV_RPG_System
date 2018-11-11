@@ -44,5 +44,13 @@ namespace Core.ControlSystem
                 return Input.GetButtonDown("Fire1");
             }
         }
+
+        public static bool SpaceBar
+        {
+            get
+            {
+                return Input.GetButtonDown("Jump");
+            }
+        }
     }
 }

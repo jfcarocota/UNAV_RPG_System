@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Core.PartySystem;
+using Core.TalkSystem.TextBoxManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     PartySystem partySystem;
+
+    [SerializeField]
+    TextBoxManager textBoxManager;
 
     void Awake()
     {
@@ -28,6 +32,14 @@ public class GameManager : MonoBehaviour
         get
         {
             return partySystem;
+        }
+    }
+
+    public TextBoxManager TextBoxManager
+    {
+        get
+        {
+            return textBoxManager;
         }
     }
 }

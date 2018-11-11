@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Core.ControlSystem;
+using Core.TalkSystem.Lines;
 
 public abstract class Character : MonoBehaviour
 {
@@ -14,11 +15,22 @@ public abstract class Character : MonoBehaviour
 
     protected Animator anim;
 
+    [SerializeField]
+    Lines lines;
+
     public float Speed
     {
         get
         {
             return speed;
+        }
+    }
+
+    public Lines Lines
+    {
+        get
+        {
+            return lines;
         }
     }
 
